@@ -62,6 +62,18 @@ class MobileController extends Controller
     public function update(UpdateMobileRequest $request, Mobile $mobile)
     {
         $mobile->update($request->all());
+        $mobile->update([
+            'name' => $request->name,
+            'brand' => $request->brand,
+            'description' => $request->description,
+            'price' => $request->price,
+        ]);
+        $mobile->name = $request->name;
+        $mobile->brand = $request->brand;
+        $mobile->description = $request->description;
+        $mobile->price = $request->price;
+        $mobile->save();
+
 
         return redirect()->route('mobiles.index')->with('success','Mobile updated successfully');
     }
